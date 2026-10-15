@@ -4,7 +4,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 :root{--r:#ed404d;--bg:#f5f6f9;--tx:#1e2735;--muted:#788393;--line:#e8ebf0}*{box-sizing:border-box}body{background:var(--bg);color:var(--tx);margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:var(--r)}.wrap{max-width:950px;margin:auto;padding:18px 15px 85px}.top{display:flex;align-items:center;gap:11px;margin:6px 0 18px}.brand{background:var(--r);border-radius:16px;width:49px;height:49px;display:grid;place-items:center;color:white;font-size:25px;font-weight:900}.top h1{font-size:20px;letter-spacing:-.7px;margin:0}.muted{color:var(--muted)}.top small{font-size:12px}.panel{background:#fff;border:1px solid #edf0f3;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px #15253d08}.panel h2{font-size:17px;margin:0 0 13px}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:12px;font-weight:750;color:#586374}.field input,.field select,.field textarea,.search{width:100%;min-height:45px;border:1px solid #dce1e8;border-radius:11px;padding:10px 12px;background:#fff;color:var(--tx);outline:none}.field textarea{min-height:72px;resize:vertical}.field input:focus,.field textarea:focus,.search:focus{border-color:#ed7982;box-shadow:0 0 0 3px #ed404d16}.btn{border:0;background:var(--r);color:white;border-radius:12px;padding:12px 15px;font-weight:800;min-height:43px}.btn:disabled{opacity:.5}.btn.alt{background:#f1f3f7;color:#445365}.btn.warn{background:#fff2f2;color:#be3643}.btn.small{font-size:12px;padding:9px 12px;min-height:35px}.row{display:flex;align-items:center;flex-wrap:wrap;gap:9px}.row>*{min-width:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.col{min-width:0}.list{max-height:500px;overflow:auto}.item{display:flex;align-items:center;gap:10px;min-height:64px;padding:12px 8px;border-bottom:1px solid #f0f1f4;cursor:pointer}.item:last-child{border:0}.item.active{background:#fff1f2;border-radius:12px}.item strong{display:block;font-size:13px}.item small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.emoji{display:grid;place-items:center;background:#f1f3f7;border-radius:12px;font-size:21px;min-width:40px;height:40px}.pill{background:#f1f3f6;border-radius:20px;color:#5f6e7e;font-size:11px;padding:5px 8px}.status{padding:10px 12px;border-radius:12px;background:#f1f5fa;color:#536071;line-height:1.5;margin:10px 0;font-size:12px}.status.err{color:#b63d3d;background:#ffeff0}.status.ok{color:#236f52;background:#ecf9f3}#map{height:285px;border-radius:14px;overflow:hidden;margin:8px 0 12px;background:#e3e8eb}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.login{max-width:420px;margin:42px auto}.login h2{font-size:24px}.details{display:none}.details.active{display:block}.hidden{display:none!important}.note{font-size:12px;color:#7d8792;line-height:1.6}.headright{margin-left:auto;display:flex;gap:7px}#logout{display:none}.alert{background:#fff8e6;border:1px solid #f4e0ae;border-radius:13px;padding:13px;color:#775c23;font-size:12px;line-height:1.5;margin-bottom:16px}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);max-width:90vw;background:#232d3c;color:white;border-radius:15px;padding:13px 17px;box-shadow:0 12px 35px #131a2333;z-index:2000;display:none;font-size:13px}@media(max-width:730px){.grid{grid-template-columns:1fr}.wrap{padding:13px 12px 75px}.top h1{font-size:17px}.list{max-height:275px}.panel{padding:15px}} 
-</style></head><body>
+
+#z10InboxAdmin select,#z10AdsAdmin select{background:white;border:1px solid #e0e5ec;padding:11px;border-radius:11px;color:#273142;max-width:100%}
+.z10-adminentry{background:#f9fafc;border:1px solid #e8edf2;border-radius:15px;padding:15px;font-size:13px}
+.z10-adminentry strong{display:block;font-size:14px;margin-bottom:7px}
+.z10-adminentry p{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;color:#47576a;margin:7px 0}
+.z10-adminmeta{font-size:11px;color:#7e8998}
+.z10-adminentry a{color:#cf344d}
+</style><link rel="icon" type="image/png" href="./icon-192.png"></head><body>
 <div class="wrap"><div class="top"><div class="brand">Ж</div><div><h1>ЖАҢАТАС LIVE</h1><small class="muted">Жеке әкімші панелі</small></div><div class="headright"><a class="btn alt small" style="text-decoration:none;display:grid;place-items:center" href="./index.html">↗ Сайт</a><button class="btn alt small" id="logout" type="button">Шығу</button></div></div>
 <div id="missingConfig" class="alert hidden"><b>Дерекқор әлі қосылмаған.</b> Дерекқорға қосылу мүмкін емес. Интернетті тексеріңіз. Ешқашан service_role немесе құпия кілт енгізбеңіз.</div>
 <div id="loginBox" class="panel login hidden"><h2>🔐 Әкімші ретінде кіру</h2><p class="muted">Тек бекітілген әкімші мәліметті өзгерте алады. Құпиясөз бұл құрылғыдан басқаға жіберілмейді.</p><form id="loginForm"><div class="field"><label>Email</label><input id="email" type="email" autocomplete="email" required placeholder="example@gmail.com"></div><div class="field"><label>Құпиясөз (кемінде 6 белгі)</label><input id="password" type="password" autocomplete="current-password" minlength="6" required></div><div class="row"><button class="btn" id="loginButton" type="submit">Кіру</button><button class="btn alt" id="registerButton" type="button">Алғаш рет тіркелу</button></div></form><div class="status" id="loginStatus">Алдымен әкімші аккаунтын тіркеу немесе оған кіру қажет.</div></div>
@@ -25,6 +32,65 @@
  </form><div class="list" id="zhlNoticeExisting" style="max-height:370px"></div>
 </section>
 
+
+<section class="panel" id="zhlInstagramAdmin" style="margin-top:16px">
+ <div class="row" style="justify-content:space-between;align-items:center"><h2>📷 Instagram ақпарат көздері</h2><span class="pill">Тексеріп жариялау</span></div>
+ <p class="note">@zhanatas_akimdigi және @sarysu.akimat парақшаларынан қалаға қатысты маңызды постты өзің тексеріп, сілтемесін қой. Instagram посттары әзірге автоматты оқылмайды. Gov.kz жаңалықтары автоматты жаңара береді.</p>
+ <div class="row" style="gap:10px;flex-wrap:wrap;margin:12px 0">
+   <a class="btn alt small" href="https://www.instagram.com/zhanatas_akimdigi/" target="_blank" rel="noopener noreferrer">Жаңатас Instagram ↗</a>
+   <a class="btn alt small" href="https://www.instagram.com/sarysu.akimat/" target="_blank" rel="noopener noreferrer">Сарысу Instagram ↗</a>
+ </div>
+ <form id="zhlSocialForm">
+  <div class="two"><div class="field"><label for="zhlSocialAccount">Парақша</label><select id="zhlSocialAccount"><option value="zhanatas_akimdigi">@zhanatas_akimdigi</option><option value="sarysu.akimat">@sarysu.akimat</option></select></div>
+  <div class="field"><label for="zhlSocialType">Қай бөлімге?</label><select id="zhlSocialType"><option value="news">📰 Жаңалықтар</option><option value="notice">📣 Хабарламалар</option></select></div></div>
+  <div class="field"><label for="zhlSocialURL">Instagram постының сілтемесі</label><input id="zhlSocialURL" type="url" required maxlength="500" placeholder="https://www.instagram.com/p/..."><p class="note">Посттың нақты сілтемесін көшір. Stories жарамайды (24 сағаттан кейін өшуі мүмкін).</p></div>
+  <div class="field"><label for="zhlSocialTitle">Тақырыбы</label><input id="zhlSocialTitle" required minlength="4" maxlength="220" placeholder="Посттағы маңызды ақпараттың қысқа атауы"></div>
+  <div class="field"><label for="zhlSocialSummary">Қысқаша мазмұны</label><textarea id="zhlSocialSummary" rows="3" maxlength="1800" style="resize:vertical;width:100%;font:inherit;border:1px solid #e2e7ef;border-radius:13px;padding:12px" placeholder="Тек постта нақты жазылған деректі көшір; күнін/мекенжайын тексер."></textarea></div>
+  <div class="two"><div class="field"><label for="zhlSocialDate">Пост жарияланған уақыт</label><input id="zhlSocialDate" type="datetime-local" required></div>
+   <div class="field"><label for="zhlSocialKind">Хабарлама түрі</label><select id="zhlSocialKind"><option value="other">📣 Басқа</option><option value="water">💧 Су</option><option value="electricity">⚡ Жарық</option><option value="heating">♨️ Жылу</option><option value="roads">🚧 Жол</option></select></div></div>
+  <div class="field" id="zhlSocialExpiresRow"><label for="zhlSocialExpires">Хабарлама аяқталатын уақыт (міндетті)</label><input id="zhlSocialExpires" type="datetime-local"><p class="note">Бұл өріс тек «Хабарламалар» үшін қолданылады.</p></div>
+  <button class="btn" type="submit" id="zhlSocialPublish">✓ Тексерілген постты жариялау</button>
+  <p id="zhlSocialMessage" class="note" role="status">Instagram парақшаларындағы жазбалар осы форма арқылы ғана сайтқа қосылады.</p>
+ </form>
+ <div class="list" id="zhlSocialExisting" style="max-height:320px"></div>
+</section>
+
+
+
+<section class="panel" id="z10AnalyticsAdmin" style="margin-top:16px"><h2>📊 Қаралым статистикасы</h2><p class="note">Келушілер саны жуық көрсетіледі. Жеке тұлғаны анықтау немесе жарнама табысын есептеу құралы емес.</p><div id="z10AnalyticsView" class="row" style="gap:15px;flex-wrap:wrap"><span>Жүктелуде…</span></div><button type="button" class="btn alt small" id="z10AnalyticsReload">↻ Жаңарту</button></section>
+<section class="panel" id="z10InboxAdmin" style="margin-top:16px">
+ <div class="row" style="justify-content:space-between;align-items:center"><h2>📨 Халықтан келген хабарламалар</h2><span class="pill" id="z10InboxBadge">0 жаңа</span></div>
+ <p class="note">Сұрақ, мекеме қатесі, қала мәселесі, ұсыныс және жарнамаға өтінім осында түседі. Хабарлама тұрғындарға жарияланбайды. Ресми арыздар eOtinish арқылы беріледі.</p>
+ <div class="row" style="gap:9px;margin:10px 0"><select id="z10InboxFilter" aria-label="Сүзгі"><option value="all">Барлық хаттар</option><option value="new">Жаңа</option><option value="reviewed">Қаралды</option><option value="archived">Мұрағат</option></select><button type="button" id="z10InboxReload" class="btn alt small">↻ Жаңарту</button></div>
+ <div id="z10InboxList" style="display:grid;gap:12px"><p class="note">Өтініштер жүктелуде…</p></div>
+ <p id="z10InboxInfo" class="note" role="status"></p>
+</section>
+<section class="panel" id="z10AdsAdmin" style="margin-top:16px">
+ <div class="row" style="justify-content:space-between;align-items:center"><h2>📣 Жарнамалар</h2><span class="pill">Админ мақұлдаған</span></div>
+ <p class="note">Төлемді тексеру автоматтандырылмаған. Тек мазмұны мен келісімі тексерілген жарнаманы мақұлда. Мерзімі біткенде сайтта өзі жоғалады.</p>
+ <form id="z10AdForm"><input type="hidden" id="z10AdID"><div class="two"><div class="field"><label for="z10AdAdvertiser">Кәсіпкер / дүкен атауы</label><input required maxlength="150" id="z10AdAdvertiser" placeholder="Мысалы: Гүл дүкені"></div><div class="field"><label for="z10AdTitle">Жарнама тақырыбы</label><input required maxlength="140" id="z10AdTitle"></div></div>
+ <div class="field"><label for="z10AdBody">Қысқаша мәтін</label><textarea required rows="3" maxlength="550" id="z10AdBody" style="width:100%;border:1px solid #e2e7ef;padding:11px;border-radius:12px"></textarea></div>
+ <div class="field"><label for="z10AdLink">Сыртқы HTTPS сілтемесі (міндетті емес)</label><input type="url" id="z10AdLink" maxlength="700" placeholder="https://..."></div>
+ <div class="two"><div class="field"><label for="z10AdStart">Басталуы</label><input type="datetime-local" id="z10AdStart" required></div><div class="field"><label for="z10AdEnd">Аяқталуы</label><input type="datetime-local" id="z10AdEnd" required></div></div>
+ <div class="field"><label for="z10AdStatus">Күйі</label><select id="z10AdStatus"><option value="draft">Жоба (жарияланбайды)</option><option value="approved">✓ Мақұлданған жарнама</option><option value="paused">⏸ Тоқтатылған</option></select></div>
+ <div class="row" style="gap:10px"><button class="btn" type="submit">Жарнаманы сақтау</button><button class="btn alt" type="button" id="z10AdClear">Жаңа жарнама</button></div><p class="note" id="z10AdMessage" role="status"></p></form>
+ <div id="z10AdAdminList" style="display:grid;gap:9px;margin-top:18px"></div>
+</section>
+
+<section class="panel" id="zhlFaqAdmin" style="margin-top:16px">
+ <div class="row" style="justify-content:space-between;align-items:center"><h2>💬 Сұрақ-жауап</h2><span class="pill">Тегін · тексерілген дерек</span></div>
+ <p class="note">Сұрақтар мен жауаптарды осы жерден қосуға және жаңартуға болады. Жариялағаннан кейін сайтта бірден көрінеді, GitHub жаңарту қажет емес. Тек тексерілген ақпарат жазыңыз.</p>
+ <form id="zhlFaqForm">
+  <input type="hidden" id="zhlFaqId">
+  <div class="two"><div class="field"><label for="zhlFaqCat">Санат</label><select id="zhlFaqCat"><option value="general">Жалпы</option><option value="services">Мемлекеттік қызметтер</option><option value="transport">Көлік</option><option value="work">Жұмыс</option><option value="map">Карта және мекемелер</option><option value="news">Жаңалықтар</option><option value="alerts">Хабарламалар</option></select></div><div class="field"><label for="zhlFaqPublished">Жариялау</label><select id="zhlFaqPublished"><option value="yes">Иә — тұрғындарға көрінеді</option><option value="no">Жоқ — жоба күйінде</option></select></div></div>
+  <div class="field"><label for="zhlFaqQuestion">Сұрақ</label><input id="zhlFaqQuestion" maxlength="260" minlength="5" required placeholder="Мысалы: Баланы балабақшаға қалай жазам?"></div>
+  <div class="field"><label for="zhlFaqAlternates">Басқаша айтылуы (әрқайсысы бөлек жолда)</label><textarea id="zhlFaqAlternates" rows="2" style="resize:vertical;width:100%;font:inherit;border:1px solid #e2e7ef;border-radius:13px;padding:12px" placeholder="садик&#10;балабақшаға тіркеу"></textarea></div>
+  <div class="field"><label for="zhlFaqAnswer">Тексерілген жауап</label><textarea id="zhlFaqAnswer" minlength="4" maxlength="1600" required rows="4" style="resize:vertical;width:100%;font:inherit;border:1px solid #e2e7ef;border-radius:13px;padding:12px" placeholder="Қысқа, түсінікті және ресми дерекпен расталған жауап"></textarea></div>
+  <div class="field"><label for="zhlFaqSource">Дереккөздің HTTPS сілтемесі</label><input id="zhlFaqSource" type="url" maxlength="700" placeholder="https://www.gov.kz/..." required></div>
+  <div class="row" style="gap:9px"><button class="btn" type="submit" id="zhlFaqSave">Сақтау</button><button class="btn alt" id="zhlFaqReset" type="button">Жаңа сұрақ</button></div><p class="note" id="zhlFaqAdminStatus"></p>
+ </form>
+ <div class="list" id="zhlFaqAdminList" style="margin-top:12px;max-height:320px;overflow:auto"></div>
+</section>
 <div class="panel"><h2>🛡️ Қауіпсіздік</h2><p class="note">Қонақтар деректерді тек оқиды. Өзгерту құқығы Supabase серверінің RLS ережелерімен қорғалады. Бұл бөлімнің URL-ін білген адам ғана ештеңе өзгерте алмайды. Өзгеріс соңғы сақталған нұсқамен синхрондалады.</p></div></div>
 </div><div id="toast" role="status"></div>
 <script>window.ZHL_CLOUD = {"url": "https://lbnfwwyjsgewzjliuxjl.supabase.co", "key": "sb_publishable_jFnBGmBmBujdmLjfM9KTXw_1MTFcWyP"};</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -44,7 +110,7 @@ const safeNum=x=>{const n=Number(x);return Number.isFinite(n)?n:null};
 function visible(view){for(const id of ['loginBox','notAdmin','dashboard'])$(id).classList.toggle('hidden',id!==view);$('logout').style.display=view!=='loginBox'?'inline-flex':'none'}
 function applyRows(){const dict=new Map(seed.map(p=>[p.id,{...p}]));for(const row of rows){if(row.is_hidden){dict.delete(row.id);continue;}if(row.data&&typeof row.data==='object')dict.set(row.id,{...dict.get(row.id),...row.data,id:row.id});}all=[...dict.values()];renderList()}
 async function loadRows(){const {data,error}=await sb.from('zhl_places').select('id,data,is_hidden').limit(2000);if(error)throw error;rows=data||[];applyRows();}
-async function refreshSession(){const {data:{session}}=await sb.auth.getSession();user=session?.user||null;if(!user){visible('loginBox');return;}const {data,error}=await sb.from('zhl_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error){visible('notAdmin');notify(error.message);return;}if(!data){$('userId').textContent=user.id;visible('notAdmin');return;}visible('dashboard');try{await loadRows();await loadNoticeAdmin()}catch(e){notify('Деректерді жүктеу мүмкін емес: '+e.message)}}
+async function refreshSession(){const {data:{session}}=await sb.auth.getSession();user=session?.user||null;if(!user){visible('loginBox');return;}const {data,error}=await sb.from('zhl_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error){visible('notAdmin');notify(error.message);return;}if(!data){$('userId').textContent=user.id;visible('notAdmin');return;}visible('dashboard');try{await loadRows();await loadNoticeAdmin();await loadSocialAdmin();await zhlFaqLoadAdmin();await z10InboxLoad();await z10AdsLoad();await z10AnalyticsLoad()}catch(e){notify('Деректерді жүктеу мүмкін емес: '+e.message)}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginStatus').textContent='Кіру тексерілуде...';const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginStatus').textContent='Кіру мүмкін болмады: '+error.message;return;}$('loginStatus').textContent='Кіру сәтті';await refreshSession()});
 $('registerButton').addEventListener('click',async()=>{const email=$('email').value.trim(),password=$('password').value;if(!email||password.length<6){notify('Email мен кемінде 6 таңбалы құпиясөзді енгізіңіз');return;}const {data,error}=await sb.auth.signUp({email,password,options:{emailRedirectTo:new URL('./admin.html',location.href).href}});$('loginStatus').textContent=error?error.message:(data.session?'Аккаунт құрылды; әкімші рұқсаты қажет':'Тіркеу басталды. Email-ға келген растау сілтемесін ашыңыз.');if(data.session)await refreshSession()});
 $('logout').addEventListener('click',async()=>{await sb.auth.signOut();user=null;visible('loginBox')});
@@ -94,6 +160,117 @@ $('zhlNoticeForm').addEventListener('submit',async e=>{
  $('zhlNoticeMessage').textContent='✓ Жарияланды. Халық сайтты жаңартқанда көреді.';$('zhlNoticeForm').reset();await loadNoticeAdmin();
 });
 $('zhlNoticeReload').addEventListener('click',loadNoticeAdmin);
+
+
+// Verified Instagram post curation; no access to the Instagram API or user passwords.
+function syncSocialType(){
+ const isNotice=$('zhlSocialType').value==='notice';
+ $('zhlSocialExpiresRow').classList.toggle('hidden',!isNotice);
+ $('zhlSocialKind').disabled=!isNotice;
+ $('zhlSocialExpires').required=isNotice;
+}
+$('zhlSocialType').addEventListener('change',syncSocialType);
+syncSocialType();
+function localDateTimeString(date){
+ const d=new Date(date),p=n=>String(n).padStart(2,'0');
+ return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+$('zhlSocialDate').value=localDateTimeString(new Date());
+async function loadSocialAdmin(){
+ if(!user)return;
+ const {data,error}=await sb.from('zhl_social_posts').select('id,title,post_url,source_handle,published_at,expires_at,is_published').order('published_at',{ascending:false}).limit(80);
+ const el=$('zhlSocialExisting');el.replaceChildren();
+ if(error){$('zhlSocialMessage').textContent='Instagram тізімін оқу мүмкін емес: '+error.message;return;}
+ if(!data?.length){const p=document.createElement('p');p.className='note';p.textContent='Әзірге Instagram-нан жарияланған пост жоқ.';el.append(p);return;}
+ for(const item of data){
+  const row=document.createElement('div');row.style.cssText='padding:12px;border-bottom:1px solid #eef0f4;display:flex;gap:10px;align-items:center;justify-content:space-between';
+  const info=document.createElement('div');info.style.flex='1';
+  const link=document.createElement('a');link.href=item.post_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=item.title;link.style.cssText='font-weight:750;font-size:13px;color:#273649;text-decoration:none';
+  const label=document.createElement('p');label.className='note';label.textContent='@'+item.source_handle+' · '+(item.is_published?'Жарияланды':'Жасырылды')+' · '+new Date(item.published_at).toLocaleDateString('kk-KZ');
+  info.append(link,label);row.append(info);
+  const btn=document.createElement('button');btn.type='button';btn.className='btn alt small';btn.textContent=item.is_published?'Жасыру':'Қайта жариялау';
+  btn.addEventListener('click',async()=>{
+   if(!confirm('Жазбаның жариялану күйін өзгертеміз бе?'))return;
+   btn.disabled=true;
+   const {error}=await sb.from('zhl_social_posts').update({is_published:!item.is_published,updated_by:user.id,updated_at:new Date().toISOString()}).eq('id',item.id);
+   btn.disabled=false;if(error){$('zhlSocialMessage').textContent='Қате: '+error.message;return;}
+   await loadSocialAdmin();
+  });row.append(btn);el.append(row);
+ }
+}
+$('zhlSocialForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(!user)return;
+ const raw=$('zhlSocialURL').value.trim();let url;
+ try{
+  url=new URL(raw);
+  if(url.protocol!=='https:'||!['www.instagram.com','instagram.com'].includes(url.hostname)||!/^\/(p|reel|reels|tv)\/[A-Za-z0-9_-]+\/?$/.test(url.pathname))throw Error('bad instagram permalink');
+ }catch{$('zhlSocialMessage').textContent='Instagram постының дұрыс сілтемесін енгіз (p немесе reel).';return;}
+ const post_url='https://www.instagram.com'+url.pathname.replace(/\/$/,'')+'/';
+ const title=$('zhlSocialTitle').value.trim(),summary=$('zhlSocialSummary').value.trim();
+ const type=$('zhlSocialType').value;
+ const date=new Date($('zhlSocialDate').value);if(!Number.isFinite(+date)||+date>Date.now()+86400000||Date.now()- +date>120*86400000){$('zhlSocialMessage').textContent='Соңғы 120 күннің ішіндегі нақты жарияланған күнді енгіз.';return;}
+ const expires=$('zhlSocialExpires').value?new Date($('zhlSocialExpires').value):null;
+ if(type==='notice'&&(!expires||!Number.isFinite(+expires)||+expires<=Date.now()||+expires-Date.now()>31*86400000)){$('zhlSocialMessage').textContent='Маңызды хабарлама үшін алдағы 31 күн ішіндегі аяқталу уақытын енгіз.';return;}
+ if(title.length<4){$('zhlSocialMessage').textContent='Тақырыбы кемінде 4 әріп болуы керек.';return;}
+ const payload={source_handle:$('zhlSocialAccount').value,post_type:type,category:type==='notice'?$('zhlSocialKind').value:'other',title,summary,post_url,published_at:date.toISOString(),expires_at:type==='notice'?expires.toISOString():null,is_published:true,updated_by:user.id,updated_at:new Date().toISOString()};
+ const b=$('zhlSocialPublish');b.disabled=true;
+ const {error}=await sb.from('zhl_social_posts').insert(payload);b.disabled=false;
+ if(error){$('zhlSocialMessage').textContent=error.code==='23505'?'Бұл пост бұрын қосылған.':('Сақтау қатесі: '+error.message);return;}
+ $('zhlSocialMessage').textContent='✓ Instagram посты тұрғындарға жарияланды. GitHub жаңартудың қажеті жоқ.';
+ $('zhlSocialForm').reset();$('zhlSocialDate').value=localDateTimeString(new Date());syncSocialType();await loadSocialAdmin();
+});
+
+
+// FAQ content management — only authorized admins; all writes are protected by Supabase RLS.
+let zhlFaqAdminRows=[];
+const zhlFaqElem=id=>document.getElementById(id);
+function zhlFaqFormReset(){zhlFaqElem('zhlFaqForm').reset();zhlFaqElem('zhlFaqId').value='';zhlFaqElem('zhlFaqAdminStatus').textContent='Жаңа сұрақ қосуға дайын.'}
+function zhlFaqEditAdmin(r){zhlFaqElem('zhlFaqId').value=r.id;zhlFaqElem('zhlFaqCat').value=r.category;zhlFaqElem('zhlFaqPublished').value=r.is_published?'yes':'no';zhlFaqElem('zhlFaqQuestion').value=r.question;zhlFaqElem('zhlFaqAnswer').value=r.answer;zhlFaqElem('zhlFaqAlternates').value=(r.alternate_questions||[]).join('\n');zhlFaqElem('zhlFaqSource').value=r.source_url||'';zhlFaqElem('zhlFaqAdmin').scrollIntoView({behavior:'smooth',block:'start'})}
+async function zhlFaqLoadAdmin(){const {data,error}=await sb.from('zhl_faq').select('id,question,alternate_questions,answer,category,source_url,is_published').order('question',{ascending:true}).limit(200);if(error){zhlFaqElem('zhlFaqAdminStatus').textContent='Сұрақтар жүктелмеді: '+error.message;return;}zhlFaqAdminRows=data||[];const list=zhlFaqElem('zhlFaqAdminList');list.replaceChildren();for(const r of zhlFaqAdminRows){const el=document.createElement('div');el.style.cssText='display:flex;align-items:center;gap:7px;justify-content:space-between;border-bottom:1px solid #e8ebef;padding:12px 6px';const info=document.createElement('span');info.textContent=(r.is_published?'✅ ':'🔒 ')+r.question;info.style.cssText='font-size:12px;line-height:1.4';const b=document.createElement('button');b.className='btn alt small';b.type='button';b.textContent='Өңдеу';b.addEventListener('click',()=>zhlFaqEditAdmin(r));el.append(info,b);list.append(el)}if(!zhlFaqAdminRows.length){list.textContent='Әлі сұрақ жоқ.'}}
+zhlFaqElem('zhlFaqReset').addEventListener('click',zhlFaqFormReset);
+zhlFaqElem('zhlFaqForm').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const btn=zhlFaqElem('zhlFaqSave');btn.disabled=true;const id=zhlFaqElem('zhlFaqId').value||('faq-'+crypto.randomUUID());const alternates=zhlFaqElem('zhlFaqAlternates').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).slice(0,20);const question=zhlFaqElem('zhlFaqQuestion').value.trim();const answer=zhlFaqElem('zhlFaqAnswer').value.trim();const source=zhlFaqElem('zhlFaqSource').value.trim();const category=zhlFaqElem('zhlFaqCat').value;const allowed=['general','services','transport','work','map','news','alerts'];if(!question||!answer||!allowed.includes(category)){btn.disabled=false;return}try{const u=new URL(source);if(u.protocol!=='https:')throw Error('HTTPS сілтемесі қажет')}catch{zhlFaqElem('zhlFaqAdminStatus').textContent='Қате: ресми HTTPS сілтемесін енгізіңіз.';btn.disabled=false;return}
+ const payload={id,question,answer,category,source_url:source,alternate_questions:alternates,is_published:zhlFaqElem('zhlFaqPublished').value==='yes',updated_by:user.id,updated_at:new Date().toISOString(),last_verified_at:new Date().toISOString()};
+ const {error}=await sb.from('zhl_faq').upsert(payload,{onConflict:'id'});btn.disabled=false;
+ if(error){zhlFaqElem('zhlFaqAdminStatus').textContent='Сақталмады: '+error.message;return;}
+ zhlFaqFormReset();zhlFaqElem('zhlFaqAdminStatus').textContent='✓ Сақталды! Тұрғындарға жарияланған өзгеріс бірден көрінеді.';await zhlFaqLoadAdmin();
+});
+
+
+// V10: protected moderation inbox. No public read policies exist for private messages.
+const z10Dom=id=>document.getElementById(id);
+const z10Date=t=>{try{return new Date(t).toLocaleString('kk-KZ',{dateStyle:'medium',timeStyle:'short'})}catch{return String(t||'')}};
+const z10Row=(label,value)=>{const e=document.createElement('p');const b=document.createElement('b');b.textContent=label+': ';e.append(b,document.createTextNode(value||'—'));return e};
+let z10InboxRows=[],z10AdRows=[];
+async function z10InboxLoad(){
+ if(!user)return;
+ const {data,error}=await sb.from('zhl_inbox').select('id,kind,subject,message,area,contact,status,created_at').order('created_at',{ascending:false}).limit(120);
+ if(error){z10Dom('z10InboxInfo').textContent='Өтініштер жүктелмеді: '+error.message;return}
+ z10InboxRows=data||[];z10Dom('z10InboxBadge').textContent=z10InboxRows.filter(x=>x.status==='new').length+' жаңа';z10InboxRender();
+}
+const kindNames={question:'Сұрақ',correction:'Карта қатесі',issue:'Қала мәселесі',suggestion:'Ұсыныс',contact:'Хабарласу',advertising:'Жарнамаға өтінім'};
+function z10InboxRender(){
+ const filter=z10Dom('z10InboxFilter').value,root=z10Dom('z10InboxList');root.replaceChildren();
+ const items=z10InboxRows.filter(x=>filter==='all'||x.status===filter);
+ for(const r of items){const box=document.createElement('div');box.className='z10-adminentry';const h=document.createElement('strong');h.textContent=(kindNames[r.kind]||r.kind)+' · '+r.subject;box.append(h,z10Row('Хабарлама',r.message),z10Row('Ықшамаудан',r.area),z10Row('Байланыс (құпия)',r.contact));
+ const meta=document.createElement('small');meta.className='z10-adminmeta';meta.textContent=z10Date(r.created_at)+' · '+r.status;box.append(meta);
+ const actions=document.createElement('div');actions.className='row';actions.style.cssText='gap:8px;margin-top:10px;flex-wrap:wrap';
+ for(const [status,label] of [['new','Жаңа'],['reviewed','Қаралды'],['archived','Мұрағат']]){const btn=document.createElement('button');btn.type='button';btn.textContent=label;btn.className='btn alt small';btn.disabled=r.status===status;btn.onclick=async()=>{btn.disabled=true;const {error}=await sb.from('zhl_inbox').update({status,updated_at:new Date().toISOString()}).eq('id',r.id);if(error){z10Dom('z10InboxInfo').textContent='Қате: '+error.message;btn.disabled=false}else{r.status=status;z10InboxRender();z10Dom('z10InboxBadge').textContent=z10InboxRows.filter(x=>x.status==='new').length+' жаңа'}};actions.append(btn)}box.append(actions);root.append(box)}
+ if(!items.length)root.textContent='Бұл сүзгіде хабарламалар жоқ.';
+}
+z10Dom('z10InboxReload').onclick=z10InboxLoad;z10Dom('z10InboxFilter').onchange=z10InboxRender;
+// V10: ad creation and expiration; no automatic payment verification.
+function z10AdReset(){z10Dom('z10AdForm').reset();z10Dom('z10AdID').value='';const now=new Date();const later=new Date(now.getTime()+7*86400000);const val=t=>{const d=new Date(t.getTime()-t.getTimezoneOffset()*60000);return d.toISOString().slice(0,16)};z10Dom('z10AdStart').value=val(now);z10Dom('z10AdEnd').value=val(later);z10Dom('z10AdMessage').textContent='Бағасы мен келісімі сыртта нақтыланады.'}
+z10Dom('z10AdClear').onclick=z10AdReset;z10AdReset();
+async function z10AdsLoad(){if(!user)return;const {data,error}=await sb.from('zhl_ads').select('id,advertiser,title,body,link_url,status,starts_at,ends_at').order('ends_at',{ascending:false}).limit(130);if(error){z10Dom('z10AdMessage').textContent=error.message;return}z10AdRows=data||[];z10AdsRender()}
+document.addEventListener('click',e=>{const a=e.target.closest('#z10AdsList .z10-ad a, #z10HomeAd .z10-ad a');if(a&&a.dataset.adId)z10SendStat('ad_click',a.dataset.adId)});
+function z10AdsRender(){const root=z10Dom('z10AdAdminList');root.replaceChildren();for(const r of z10AdRows){const c=document.createElement('div');c.className='z10-adminentry';c.append(z10Row('Жарнама',r.title),z10Row('Кәсіпкер',r.advertiser),z10Row('Күйі',r.status+' · '+z10Date(r.ends_at)));const b=document.createElement('button');b.textContent='Өңдеу';b.className='btn alt small';b.onclick=()=>{for(const [k,v] of [['ID',r.id],['Advertiser',r.advertiser],['Title',r.title],['Body',r.body],['Link',r.link_url||''],['Status',r.status]])z10Dom('z10Ad'+k).value=v;const val=t=>{const d=new Date(t);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};z10Dom('z10AdStart').value=val(r.starts_at);z10Dom('z10AdEnd').value=val(r.ends_at);z10Dom('z10AdForm').scrollIntoView({behavior:'smooth',block:'start'})};c.append(b);root.append(c)}if(!z10AdRows.length)root.textContent='Әлі жарнама жоқ.'}
+async function z10AnalyticsLoad(){if(!user)return;const from=new Date(Date.now()-8*86400000).toISOString().slice(0,10);const {data,error}=await sb.from('zhl_traffic_counter').select('day,event_type,hits').gte('day',from).order('day',{ascending:false}).limit(60);const root=z10Dom('z10AnalyticsView');if(error){root.textContent='Статистика уақытша қолжетімсіз: '+error.message;return}const items=data||[];const total=t=>items.filter(x=>x.event_type===t).reduce((s,x)=>s+Number(x.hits||0),0);root.replaceChildren();for(const [title,count] of [['Соңғы 7 күндегі сайт ашылуы',total('visit')],['Жарнамаға өту саны',total('ad_click')]]){const box=document.createElement('div');box.className='z10-adminentry';box.style.minWidth='135px';const n=document.createElement('strong');n.textContent=String(count);const l=document.createElement('small');l.textContent=title;box.append(n,l);root.append(box)}}
+z10Dom('z10AnalyticsReload').onclick=z10AnalyticsLoad;
+z10Dom('z10AdForm').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const f=id=>z10Dom('z10Ad'+id).value.trim(),start=new Date(f('Start')),end=new Date(f('End'));if(!Number.isFinite(+start)||!Number.isFinite(+end)||end<=start){z10Dom('z10AdMessage').textContent='Мерзім қате';return}const link=f('Link');if(link){try{if(new URL(link).protocol!=='https:')throw 1}catch{z10Dom('z10AdMessage').textContent='Сілтеме тек HTTPS болуы керек';return}}
+ const payload={advertiser:f('Advertiser'),title:f('Title'),body:f('Body'),link_url:link||null,status:f('Status'),starts_at:start.toISOString(),ends_at:end.toISOString(),updated_by:user.id};
+ const id=f('ID');let res=id?await sb.from('zhl_ads').update(payload).eq('id',id):await sb.from('zhl_ads').insert(payload);
+ if(res.error){z10Dom('z10AdMessage').textContent='Қате: '+res.error.message;return}z10Dom('z10AdMessage').textContent='✓ Сақталды. Жариялау күйі мен мерзімі ескеріледі.';z10AdReset();await z10AdsLoad();
+});
 
 sb.auth.onAuthStateChange((_event,s)=>{if(s?.user?.id!==user?.id)setTimeout(refreshSession,10)});refreshSession();
 })();
