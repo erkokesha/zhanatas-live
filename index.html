@@ -222,6 +222,7 @@
 </nav>
 <div id="toast" role="status" class="toast"></div>
 </div>
+<script>window.ZHL_CLOUD = {"url": "https://lbnfwwyjsgewzjliuxjl.supabase.co", "key": "sb_publishable_jFnBGmBmBujdmLjfM9KTXw_1MTFcWyP"};</script>
 <script>
 (()=>{'use strict';
 const LAT=43.5621,LON=69.7333,TZ='Asia/Almaty';
@@ -336,7 +337,7 @@ function renderDetails(){
  $('detailActions').innerHTML=callButton+`<a class="secondary" target="_blank" rel="noopener noreferrer" href="${directionUrl(p)}">➤ Маршрут</a>`+(Number.isFinite(p.lat)?`<button class="detailInMap" data-show-map="${escapeHTML(p.id)}">📍 Жаңатас картасында көрсету</button>`:'');
  $('detailPhoneBox').innerHTML=`<div class="detailPhoneTitle">Байланыс телефоны</div><div class="detailPhoneValue">${tel?escapeHTML(p.phone):'Нөмірі жарияланбаған'}</div><p class="detailPhoneDesc">${tel?'Нөмірді бассаңыз, телефон қоңырауын ашады.':'Қате телефон нөмірін көрсетпес үшін бос қалдырылды.'}</p>${!tel?`<a class="phoneFind" href="https://www.google.com/search?q=${encodeURIComponent(p.name+' Жаңатас телефон')}" target="_blank" rel="noopener noreferrer">Интернеттен нөмірін іздеу ↗</a>`:''}`;
  let source=p.source?`<a href="${escapeHTML(p.source)}" target="_blank" rel="noopener noreferrer">Дереккөзді қарау ↗</a>`:'';
- $('detailNote').innerHTML=escapeHTML(p.note||'Көрсетілген деректер өзгеруі мүмкін. Жұмыс уақытын және мекенжайын алдын ала нақтылаңыз.')+(source?'<div style="margin-top:8px">'+source+'</div>':'');
+ $('detailNote').innerHTML=(p.hours?'<div style="font-weight:800;margin-bottom:8px">🕒 Жұмыс уақыты: '+escapeHTML(p.hours)+'</div>':'')+escapeHTML(p.note||'Көрсетілген деректер өзгеруі мүмкін. Жұмыс уақытын және мекенжайын алдын ала нақтылаңыз.')+(source?'<div style="margin-top:8px">'+source+'</div>':'');
  $('detailPositionStatus').textContent=p.positionStatus==='corrected'?'✓ Әкімші растаған орын':p.positionStatus==='disputed'?'⚠ Картадағы белгі мекенжаймен сәйкес келмеуі мүмкін':p.positionStatus==='approximate'?'⚠ Нүкте шамамен қойылған, дұрыстығын тексеріңіз':'ℹ Нақты нүкте әлі қойылмаған';
  let card;
  if(Number.isFinite(p.lat)&&Number.isFinite(p.lon)){
@@ -443,7 +444,7 @@ async function refreshDirectory(force=true){const b=$('refreshPlaces');b.disable
   if(!data||!Array.isArray(data.elements))throw Error('No remote data');
   const newPlaces=normalizeOverpass(data.elements);
   // Replace only the remotely sourced entries; keep hand-checked entries.
-  newPlaces.forEach(applyPin);allPlaces.splice(SEED_PLACES.length,allPlaces.length-SEED_PLACES.length,...newPlaces);
+  newPlaces.forEach(applyPin);allPlaces.splice(SEED_PLACES.length,allPlaces.length-SEED_PLACES.length,...newPlaces);applyCloudPlaces();
   cacheSave('zhl-places-live-5',newPlaces);$('liveState').textContent='Картадан '+newPlaces.length+' қосымша мекеме алынды · Бүгін жаңартылды';
   renderPlaces();updateHomeSearch();if(mapReady)mapMarkers();
  }catch(e){$('liveState').textContent='Карта сервері жауап бермеді. Бастапқы каталог жұмыс істеп тұр, кейін қайталап көріңіз.'}
@@ -452,11 +453,44 @@ async function refreshDirectory(force=true){const b=$('refreshPlaces');b.disable
 $('refreshPlaces').addEventListener('click',()=>refreshDirectory(true));
 const cachedPlaces=cacheRead('zhl-places-live-5',7*86400000);
 if(cachedPlaces?.data?.length){cachedPlaces.data.forEach(applyPin);allPlaces.push(...cachedPlaces.data);$('liveState').textContent='Бұрын жүктелген карта деректері қосылды';}
+
+// Supabase-тағы әкімші жариялаған түзетулер тұрғындарға оқуға ғана қолжетімді.
+let cloudPlaces=[];
+function applyCloudPlaces(){
+  for(const row of cloudPlaces){
+    const id=String(row.id||'');if(!id)continue;
+    const i=allPlaces.findIndex(p=>p.id===id);
+    if(row.is_hidden){if(i>=0)allPlaces.splice(i,1);continue;}
+    if(!row.data||typeof row.data!=='object'||Array.isArray(row.data))continue;
+    const safe={...row.data,id};
+    // Server-side validation complements public client defensive bounds.
+    if(!['hospital','pharmacy','school','kindergarten','college','culture','shop','food','bank','post','gov','fuel','sport'].includes(safe.cat))continue;
+    if(typeof safe.name!=='string'||!safe.name.trim())continue;
+    if(i>=0)Object.assign(allPlaces[i],safe);
+    else allPlaces.push(safe);
+  }
+}
+async function fetchCloudPlaces(){
+  const cfg=window.ZHL_CLOUD;
+  if(!cfg?.url||!cfg?.key)return;
+  try{
+    const r=await fetch(cfg.url.replace(/\/$/,'')+'/rest/v1/zhl_places?select=id,data,is_hidden&limit=2000',{
+      headers:{'apikey':cfg.key},cache:'no-store'
+    });
+    if(!r.ok)throw Error('HTTP '+r.status);
+    const items=await r.json();if(!Array.isArray(items))throw Error('Bad data');
+    cloudPlaces=items;applyCloudPlaces();renderPlaces();updateHomeSearch();if(mapReady)mapMarkers();
+    if(currentPlace){const latest=allPlaces.find(p=>p.id===currentPlace.id);if(latest){currentPlace=latest;if($('place-detail').classList.contains('active'))renderDetails();}}
+  }catch(e){console.warn('Cloud: cached directory remains available',e)}
+}
+
 let directoryAutoRefreshDone=false;
 function maybeAutoRefreshDirectory(){if(directoryAutoRefreshDone)return;directoryAutoRefreshDone=true;if(!cacheRead('zhl-places-live-5',24*3600000))setTimeout(()=>refreshDirectory(false),800)}
 renderPlaces();
 // Handle direct links and initial route only after directory and map code initialized.
 activate(location.hash.slice(1)||'home');
+fetchCloudPlaces();
+setInterval(()=>{if(document.visibilityState==='visible')fetchCloudPlaces()},180000);
 
 // Standalone GitHub Pages edition: no external PWA files required.
 })();
