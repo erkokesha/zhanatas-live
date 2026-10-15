@@ -11,6 +11,20 @@
 <div id="notAdmin" class="panel hidden"><h2>🔒 Әкімші рұқсаты күтілуде</h2><p>Сіз жүйеге кірдіңіз, бірақ әзірге өзгерту құқығыңыз жоқ. Басқаруды ашу үшін тіркелген аккаунтыңызды иесі растауы тиіс.</p><p class="muted">Қауіпсіз қолданушы ID:</p><div class="row"><code id="userId" style="overflow-wrap:anywhere"></code><button class="btn alt small" id="copyUid">Көшіру</button></div><p class="note">ID құпиясөз емес. Оны жоба иесі Supabase дерекқорында әкімші ретінде бекіту үшін қолданады.</p><button class="btn alt" id="recheckAdmin">Рұқсатты қайта тексеру</button></div>
 <div id="dashboard" class="hidden"><div class="grid"><div class="col"><section class="panel"><div class="row" style="justify-content:space-between"><h2 style="margin:0">🏢 Мекемелер <span id="count" class="pill"></span></h2><button class="btn small" id="newPlace">+ Қосу</button></div><p class="note">Ізде, мекемені аш, мәліметін өзгертіп сақта. Өзгеріс тұрғындарға бірден қолжетімді болады.</p><input id="search" class="search" placeholder="Мектеп / школа / садик / атауы..." aria-label="Мекеме іздеу"><div class="list" id="list"></div></section></div>
 <div class="col"><section class="panel details" id="editBox"><div class="row" style="justify-content:space-between"><h2 id="editorTitle">Мекемені өңдеу</h2><span class="pill" id="changeStatus">Өзгерістер сақталмаған</span></div><form id="editForm"><div class="field"><label>Мекеме атауы</label><input id="name" required maxlength="160"></div><div class="field"><label>Санат</label><select id="category"><option value="hospital">🏥 Аурухана</option><option value="pharmacy">💊 Дәріхана</option><option value="school">🏫 Мектеп</option><option value="kindergarten">🧸 Балабақша</option><option value="college">🎓 Колледж</option><option value="gov">🏛️ Мемлекеттік мекеме</option><option value="culture">🎭 Мәдениет</option><option value="shop">🛍️ Дүкен</option><option value="food">🍽️ Кафе</option><option value="bank">🏦 Банк</option><option value="post">📦 Пошта</option><option value="fuel">⛽ Жанармай</option><option value="sport">🏟️ Спорт</option></select></div><div class="field"><label>Мекенжай</label><input id="address" maxlength="240" placeholder="Жаңатас, 3-шағынаудан, ..."></div><div class="two"><div class="field"><label>Телефон</label><input id="phone" type="tel" placeholder="+7..." maxlength="40"></div><div class="field"><label>Жұмыс уақыты</label><input id="hours" placeholder="09:00–18:00" maxlength="100"></div></div><div class="field"><label>Қазақша / орысша балама атауы</label><input id="alias" maxlength="220" placeholder="Школа №1, 1-мектеп"></div><div class="field"><label>Дереккөз сайты (бар болса)</label><input id="source" type="url" maxlength="350" placeholder="https://..."></div><div class="field"><label>Ескерту</label><textarea id="note" maxlength="1200"></textarea></div><b style="font-size:13px">📍 Картадағы орны</b><p class="note">Белгіні саусағыңмен жылжыт немесе картадағы дұрыс жерді түрт. Координаттар сақталады.</p><div id="map"></div><div class="two"><div class="field"><label>Ендік (lat)</label><input id="lat" type="number" step="any" inputmode="decimal"></div><div class="field"><label>Бойлық (lon)</label><input id="lon" type="number" step="any" inputmode="decimal"></div></div><div class="row"><button class="btn" id="saveButton" type="submit">✓ Сақтау және жариялау</button><button class="btn warn" id="hideButton" type="button">Мекемені жасыру</button></div></form></section><section class="panel" id="emptyEdit"><p class="muted">Өңдеу үшін сол жақтан мекемені таңда немесе жаңасын қос.</p></section></div></div>
+
+<section class="panel" id="zhlNoticeAdmin" style="margin-top:16px">
+ <div class="row" style="justify-content:space-between;align-items:center"><h2>📣 Қала хабарламалары</h2><span class="pill">Тек ресми дерекпен</span></div>
+ <p class="note">Су, жарық, жылу және жолдағы өзгерістер туралы ресми хабарламаны қос. Адамдарға бірден шығады, GitHub жаңарту қажет емес. Ресми дереккөздің сілтемесі және хабарламаның аяқталу уақыты міндетті.</p>
+ <form id="zhlNoticeForm">
+ <div class="two"><div class="field"><label for="zhlNoticeKind">Тақырыбы</label><select id="zhlNoticeKind"><option value="water">💧 Су</option><option value="electricity">⚡ Электр жарығы</option><option value="heating">♨️ Жылу</option><option value="roads">🚧 Жол</option><option value="other">📣 Басқа</option></select></div><div class="field"><label for="zhlNoticeUntil">Қай уақытқа дейін?</label><input type="datetime-local" id="zhlNoticeUntil" required></div></div>
+ <div class="field"><label for="zhlNoticeTitle">Қысқаша атауы</label><input id="zhlNoticeTitle" required minlength="4" maxlength="200" placeholder="Мысалы: 3-шағынауданда суды уақытша өшіру"></div>
+ <div class="field"><label for="zhlNoticeBody">Нақты ақпарат</label><textarea id="zhlNoticeBody" maxlength="1700" rows="4" style="resize:vertical;width:100%;font:inherit;border:1px solid #e2e7ef;border-radius:13px;padding:12px" placeholder="Қай мекенжайлар, қай уақыт, жауапты мекеме..."></textarea></div>
+ <div class="field"><label for="zhlNoticeLink">Ресми жарияланым сілтемесі</label><input id="zhlNoticeLink" type="url" maxlength="700" required placeholder="https://www.gov.kz/..."></div>
+ <div class="row"><button class="btn" type="submit" id="zhlNoticePublish">✓ Хабарламаны жариялау</button><button type="button" class="btn alt" id="zhlNoticeReload">↻ Тізімді жаңарту</button></div>
+ <p class="note" id="zhlNoticeMessage" role="status">Әзірше автоматты gov.kz хабарламалары бөлек жиналады. Бұл форма — жергілікті нақты хабарлама жариялау үшін.</p>
+ </form><div class="list" id="zhlNoticeExisting" style="max-height:370px"></div>
+</section>
+
 <div class="panel"><h2>🛡️ Қауіпсіздік</h2><p class="note">Қонақтар деректерді тек оқиды. Өзгерту құқығы Supabase серверінің RLS ережелерімен қорғалады. Бұл бөлімнің URL-ін білген адам ғана ештеңе өзгерте алмайды. Өзгеріс соңғы сақталған нұсқамен синхрондалады.</p></div></div>
 </div><div id="toast" role="status"></div>
 <script>window.ZHL_CLOUD = {"url": "https://lbnfwwyjsgewzjliuxjl.supabase.co", "key": "sb_publishable_jFnBGmBmBujdmLjfM9KTXw_1MTFcWyP"};</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -30,7 +44,7 @@ const safeNum=x=>{const n=Number(x);return Number.isFinite(n)?n:null};
 function visible(view){for(const id of ['loginBox','notAdmin','dashboard'])$(id).classList.toggle('hidden',id!==view);$('logout').style.display=view!=='loginBox'?'inline-flex':'none'}
 function applyRows(){const dict=new Map(seed.map(p=>[p.id,{...p}]));for(const row of rows){if(row.is_hidden){dict.delete(row.id);continue;}if(row.data&&typeof row.data==='object')dict.set(row.id,{...dict.get(row.id),...row.data,id:row.id});}all=[...dict.values()];renderList()}
 async function loadRows(){const {data,error}=await sb.from('zhl_places').select('id,data,is_hidden').limit(2000);if(error)throw error;rows=data||[];applyRows();}
-async function refreshSession(){const {data:{session}}=await sb.auth.getSession();user=session?.user||null;if(!user){visible('loginBox');return;}const {data,error}=await sb.from('zhl_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error){visible('notAdmin');notify(error.message);return;}if(!data){$('userId').textContent=user.id;visible('notAdmin');return;}visible('dashboard');try{await loadRows()}catch(e){notify('Деректерді жүктеу мүмкін емес: '+e.message)}}
+async function refreshSession(){const {data:{session}}=await sb.auth.getSession();user=session?.user||null;if(!user){visible('loginBox');return;}const {data,error}=await sb.from('zhl_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error){visible('notAdmin');notify(error.message);return;}if(!data){$('userId').textContent=user.id;visible('notAdmin');return;}visible('dashboard');try{await loadRows();await loadNoticeAdmin()}catch(e){notify('Деректерді жүктеу мүмкін емес: '+e.message)}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginStatus').textContent='Кіру тексерілуде...';const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginStatus').textContent='Кіру мүмкін болмады: '+error.message;return;}$('loginStatus').textContent='Кіру сәтті';await refreshSession()});
 $('registerButton').addEventListener('click',async()=>{const email=$('email').value.trim(),password=$('password').value;if(!email||password.length<6){notify('Email мен кемінде 6 таңбалы құпиясөзді енгізіңіз');return;}const {data,error}=await sb.auth.signUp({email,password,options:{emailRedirectTo:new URL('./admin.html',location.href).href}});$('loginStatus').textContent=error?error.message:(data.session?'Аккаунт құрылды; әкімші рұқсаты қажет':'Тіркеу басталды. Email-ға келген растау сілтемесін ашыңыз.');if(data.session)await refreshSession()});
 $('logout').addEventListener('click',async()=>{await sb.auth.signOut();user=null;visible('loginBox')});
@@ -45,6 +59,42 @@ function setMapPos(lat,lon,write=false){if(!ready)return;const a=safeNum(lat),b=
 for(const f of ['lat','lon'])$(f).addEventListener('change',()=>setMapPos($('lat').value||null,$('lon').value||null));
 $('editForm').addEventListener('submit',async e=>{e.preventDefault();if(!current||!user)return;const lat=$('lat').value===''?null:safeNum($('lat').value),lon=$('lon').value===''?null:safeNum($('lon').value);if(lat!==null&&(!(lat>43.45&&lat<43.67)||!(lon>69.5&&lon<69.9))){notify('Координат Жаңатас аумағына сәйкес емес');return;}const source=$('source').value.trim();if(source&&!/^https:\/\//i.test(source)){notify('Дереккөз https:// болып басталуы керек');return;}let d={...current,name:$('name').value.trim(),cat:$('category').value,address:$('address').value.trim(),phone:$('phone').value.trim(),hours:$('hours').value.trim(),alias:$('alias').value.trim(),source,note:$('note').value.trim(),lat,lon,positionStatus:marked?'corrected':(current.positionStatus||'approximate')};if(!d.name){notify('Атауын енгізіңіз');return;}if(d.phone&&!/^\+?[0-9 ()-]{5,30}$/.test(d.phone)){notify('Телефон форматында қате');return;}delete d._marker;$('saveButton').disabled=true;const {error}=await sb.from('zhl_places').upsert({id:d.id,data:d,is_hidden:false,updated_by:user.id,updated_at:new Date().toISOString()},{onConflict:'id'});$('saveButton').disabled=false;if(error){notify('Сақталмады: '+error.message);return;}marked=false;current=d;notify('✓ Сақталды. Тұрғындарға жарияланды');$('changeStatus').textContent='✓ Жарияланды';await loadRows();});
 $('hideButton').addEventListener('click',async()=>{if(!current||!user)return;if(!confirm('Мекемені жалпы тізімнен жасырамыз ба?'))return;const {error}=await sb.from('zhl_places').upsert({id:current.id,data:current,is_hidden:true,updated_by:user.id,updated_at:new Date().toISOString()},{onConflict:'id'});if(error){notify('Жасыру мүмкін болмады: '+error.message);return;}current=null;$('editBox').classList.remove('active');$('emptyEdit').classList.remove('hidden');notify('Мекеме жасырылды');await loadRows()});
+
+async function loadNoticeAdmin(){
+ if(!user)return;
+ const {data,error}=await sb.from('zhl_notices').select('id,title,kind,source_url,published_at,expires_at,is_published').order('published_at',{ascending:false}).limit(80);
+ const el=$('zhlNoticeExisting');el.replaceChildren();
+ if(error){$('zhlNoticeMessage').textContent='Хабарламаларды жүктеу қатесі: '+error.message;return;}
+ if(!data?.length){const empty=document.createElement('p');empty.className='note';empty.textContent='Қолмен жарияланған хабарламалар әзірге жоқ.';el.appendChild(empty);return;}
+ for(const item of data){
+ const row=document.createElement('div');row.style.cssText='padding:12px;border-bottom:1px solid #eef0f4;display:flex;gap:12px;align-items:flex-start;justify-content:space-between';
+ const txt=document.createElement('div');txt.style.flex='1';const title=document.createElement('strong');title.textContent=item.title;
+ const label=document.createElement('p');label.className='note';label.textContent=(item.is_published?'Жарияланған':'Жасырылған')+' · '+new Date(item.published_at).toLocaleDateString('kk-KZ')+(item.expires_at?' · дейін '+new Date(item.expires_at).toLocaleString('kk-KZ'):'');
+ txt.append(title,label);row.appendChild(txt);
+ const b=document.createElement('button');b.type='button';b.className='btn alt small';b.textContent=item.is_published?'Жасыру':'Қайта жариялау';
+ b.addEventListener('click',async()=>{
+  if(!confirm(item.is_published?'Хабарламаны халықтан жасырамыз ба?':'Хабарламаны қайта жариялаймыз ба?'))return;
+  b.disabled=true;
+  const {error}=await sb.from('zhl_notices').update({is_published:!item.is_published,updated_by:user.id,updated_at:new Date().toISOString()}).eq('id',item.id);
+  if(error){$('zhlNoticeMessage').textContent='Сақтау қатесі: '+error.message;b.disabled=false;return;}
+  $('zhlNoticeMessage').textContent='✓ Өзгеріс сақталды';await loadNoticeAdmin();
+ });row.appendChild(b);el.appendChild(row);
+ }
+}
+$('zhlNoticeForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(!user)return;
+ const title=$('zhlNoticeTitle').value.trim(),body=$('zhlNoticeBody').value.trim(),link=$('zhlNoticeLink').value.trim();
+ const until=new Date($('zhlNoticeUntil').value),now=new Date();
+ if(title.length<4||title.length>200||!Number.isFinite(+until)||until<=now||+until-Date.now()>31*86400000){$('zhlNoticeMessage').textContent='Атауын және алдағы 31 күн ішіндегі аяқталу уақытын дұрыс енгіз.';return;}
+ try{const url=new URL(link);if(url.protocol!=='https:')throw Error('Only HTTPS')}catch{$('zhlNoticeMessage').textContent='Ресми HTTPS сілтемесін енгіз.';return;}
+ const payload={title,body,kind:$('zhlNoticeKind').value,source_url:link,expires_at:until.toISOString(),published_at:now.toISOString(),is_published:true,updated_by:user.id,updated_at:now.toISOString()};
+ const b=$('zhlNoticePublish');b.disabled=true;
+ const {error}=await sb.from('zhl_notices').insert(payload);b.disabled=false;
+ if(error){$('zhlNoticeMessage').textContent='Қате: '+error.message;return;}
+ $('zhlNoticeMessage').textContent='✓ Жарияланды. Халық сайтты жаңартқанда көреді.';$('zhlNoticeForm').reset();await loadNoticeAdmin();
+});
+$('zhlNoticeReload').addEventListener('click',loadNoticeAdmin);
+
 sb.auth.onAuthStateChange((_event,s)=>{if(s?.user?.id!==user?.id)setTimeout(refreshSession,10)});refreshSession();
 })();
 </script></body></html>

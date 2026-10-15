@@ -37,6 +37,26 @@
 .pinEditPanel{margin:10px 0 12px;border:1px solid #f3b7bf;border-radius:17px;padding:13px;background:#fff3f4}.pinEditPanel[hidden]{display:none}.pinEditLead strong{font-size:13px;display:block;margin-bottom:4px}.pinEditLead small{font-size:11px;color:#596979;line-height:1.4;display:block}.pinEditButtons{display:flex;gap:8px;margin-top:11px}.pinEditButtons button{border:0;border-radius:12px;padding:12px 14px;font-size:12px;font-weight:800;background:#ed404d;color:white}.pinEditButtons button:disabled{background:#edabb1}.pinEditButtons button.pinCancel{background:white;color:#596575;border:1px solid #e9d4d7}.mapTools{background:#fff;border:1px solid #edf0f3;border-radius:13px;padding:13px;display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}.mapTools span{font-size:11px;color:#76818e;line-height:1.4;flex:1 1 100%}.mapTools button,.pinImport{border:1px solid #ebeff3;background:#f6f7f9;color:#495666;border-radius:10px;padding:9px;font-size:11px;font-weight:750;cursor:pointer}.positionStatus{font-size:11px;color:#b47329;background:#fff9ef;border-radius:10px;padding:8px 10px;margin:-2px 0 10px}.editPinButton{display:block;width:100%;background:#fff0f2;color:#c52d41;border:1px solid #ffd4da;border-radius:12px;padding:13px;font-size:12px;font-weight:850;margin-top:12px}.mapbox .leaflet-marker-draggable{filter:drop-shadow(0px 1px 5px #dc2538)}
 /* Қоғамдық сайтта карта нүктелерін өзгерту интерфейсі жоқ. */
 #pinEditPanel,#detailEditPin,.mapTools{display:none!important}
+
+/* 7.0: notices and verified official news, aligned with Zhanatas LIVE design */
+.zhl-fd-alert{background:#fff3e9;border:1px solid #ffe1cc;border-radius:17px;padding:16px;margin:15px 0;color:#6c4834}
+.zhl-fd-alert strong{font-size:14px;color:#794225}.zhl-fd-alert p{font-size:12px;margin:6px 0 0;line-height:1.65}
+.zhl-feed-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:17px;margin-bottom:7px}
+.zhl-live-label{display:flex;align-items:center;gap:6px;font-size:12px;color:#4e6073;font-weight:800}
+.zhl-live-dot{width:7px;height:7px;background:#36ae75;border-radius:50%}
+.zhl-refresh{background:#fff;border:1px solid #e9edf3;border-radius:12px;min-height:38px;padding:8px 12px;color:#e64451;font-size:12px;font-weight:800}
+.zhl-refresh:disabled{opacity:.55}.zhl-feed-status{color:#798595;font-size:11px;margin:7px 0 13px;line-height:1.55}
+.zhl-articles{display:grid;gap:11px;margin-bottom:17px}.zhl-story{border:1px solid #edf0f5;background:#fff;border-radius:18px;padding:17px;box-shadow:0 3px 12px #091b2e05;display:block;text-decoration:none}
+.zhl-story strong{font-size:14px;display:block;line-height:1.53;color:#182633;font-weight:800;margin:4px 0 7px}.zhl-story small{font-size:11px;color:#84909e;line-height:1.45}
+.zhl-story p{font-size:12px;line-height:1.65;color:#596678;margin:0 0 9px;max-height:58px;overflow:hidden}
+.zhl-story .zhl-view{font-size:12px;color:#e64b55;font-weight:800}
+.zhl-story-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.zhl-pill{background:#f4f6f9;padding:5px 9px;border-radius:100px;color:#5a6471;font-size:10px;font-weight:800}
+.zhl-stamp{font-size:10px;color:#929da9}.zhl-loading,.zhl-empty{background:#fff;border:1px solid #ebedf0;border-radius:17px;padding:27px 17px;color:#657286;font-size:13px;line-height:1.7;text-align:center}
+.zhl-feed-sources{background:#f3f5f8;border-radius:15px;padding:15px;margin-top:10px;color:#647184}
+.zhl-feed-sources strong{font-size:12px;color:#273548}.zhl-feed-sources p{font-size:11px;line-height:1.8;margin:7px 0}.zhl-feed-sources a{color:#d93245;text-decoration:none;font-weight:700}
+.zhl-feed-sources small{font-size:10px;line-height:1.6;display:block}
+/* The public GitHub site is READ-ONLY. No in-browser map editor for visitors. */
+#detailEditPin,.pinEditPanel,.mapTools{display:none!important}
 </style>
 </head>
 <body>
@@ -82,7 +102,7 @@
   <div class="hero" id="hero"><div class="htext"><span class="tag"><svg class="ico sm"><use href="#i-pin"/></svg> ЖАМБЫЛ ОБЛЫСЫ</span><h2>Сенің қалаң.<br>Сенің қосымшаң.</h2><p>Ауа райы, карта және пайдалы қызметтердің бәрі бір жерде.</p></div>
    <svg class="landscape" viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="276" cy="39" r="23" fill="#fff" opacity=".16"/><path d="M0 144 63 75l44 34 60-69 62 73 49-43 82 70v40H0Z" fill="#fff" opacity=".16"/><path d="m0 162 57-40 36 28 77-72 55 62 64-46 71 57v29H0Z" fill="#fff" opacity=".15"/><g fill="#fff" opacity=".21"><rect x="99" y="102" width="46" height="80" rx="2"/><rect x="149" y="116" width="51" height="64" rx="2"/><rect x="215" y="110" width="53" height="70" rx="2"/><rect x="274" y="124" width="54" height="56" rx="2"/></g><g fill="#fbd6d8" opacity=".42"><rect x="108" y="117" width="8" height="9"/><rect x="127" y="117" width="8" height="9"/><rect x="108" y="138" width="8" height="9"/><rect x="127" y="138" width="8" height="9"/><rect x="160" y="127" width="9" height="9"/><rect x="179" y="127" width="9" height="9"/><rect x="160" y="148" width="9" height="9"/><rect x="179" y="148" width="9" height="9"/><rect x="227" y="126" width="9" height="9"/><rect x="246" y="126" width="9" height="9"/><rect x="227" y="148" width="9" height="9"/><rect x="246" y="148" width="9" height="9"/></g></svg>
   </div>
-  <div class="section-header" id="serviceHeader"><h2>Қызметтер</h2><span>6 бөлім</span></div>
+  <div class="section-header" id="serviceHeader"><h2>Қызметтер</h2><span>8 бөлім</span></div>
   <div class="service-grid" id="serviceGrid">
     <button class="service" data-route="weather" data-terms="ауа райы погода күн жаңбыр жел температура прогноз"><span class="service-icon tone-sun"><svg class="ico lg"><use href="#i-weather"/></svg></span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Ауа райы</strong><small>Бүгін және 7 күнге</small></button>
     <button class="service" data-route="map" data-terms="карта map көше мекенжай адрес маршрут"><span class="service-icon tone-map"><svg class="ico lg"><use href="#i-map"/></svg></span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Қала картасы</strong><small>Көшелер мен нысандар</small></button>
@@ -90,6 +110,9 @@
     <button class="service" data-route="places" data-terms="мекемелер дәріхана аурухана мектеп балабақша садик кафе дүкен банк колледж"><span class="service-icon tone-place"><svg class="ico lg"><use href="#i-place"/></svg></span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Мекемелер</strong><small>Керек орынды табу</small></button>
     <button class="service" data-route="emergency" data-terms="жедел көмек полиция өрт скорая 112 103 102 101"><span class="service-icon tone-help"><svg class="ico lg"><use href="#i-help"/></svg></span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Жедел көмек</strong><small>Маңызды нөмірлер</small></button>
     <button class="service" data-route="links" data-terms="қызметтер egov өтініш үкімет анықтама құжат"><span class="service-icon tone-link"><svg class="ico lg"><use href="#i-link"/></svg></span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Пайдалы сілтемелер</strong><small>Ресми сервистер</small></button>
+
+    <button class="service" data-route="notices" data-terms="хабарлама хабарландыру су жарық жылу ескерту отключение воды света отопления уведомления"><span class="service-icon" style="background:#fff0e8;color:#e55a36;font-size:26px">📣</span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Хабарламалар</strong><small>Су, жарық, жылу</small></button>
+    <button class="service" data-route="news" data-terms="жаңалықтар новости жаңатас сарысу ресми әкімдік оқиғалар press"><span class="service-icon" style="background:#e9f4fe;color:#377ac9;font-size:26px">📰</span><svg class="ico sm arr"><use href="#i-arrow"/></svg><strong>Жаңалықтар</strong><small>Сарысу · Жаңатас</small></button>
   </div><div id="searchEmpty" class="emptyResults hidden">Бұл атаумен бөлім табылмады. Басқа сөзбен іздеп көріңіз.</div>
   <button class="info-strip" data-route="emergency"><span class="strip-icon"><svg class="ico"><use href="#i-phone"/></svg></span><span style="text-align:left;flex:1"><strong>Шұғыл жағдайда — 112</strong><p>Полиция, жедел жәрдем және құтқару қызметтері</p></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
   <p class="footnote">Тәуелсіз, тегін ақпараттық жоба. Мемлекеттік органның ресми қосымшасы емес.</p>
@@ -202,9 +225,28 @@
   <a class="service-link" href="tel:1414"><span class="servicon"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>1414 байланыс орталығы</strong><small>Мемлекеттік қызметтерге сұрақтар</small></div><svg class="ico sm"><use href="#i-phone"/></svg></a>
   <p class="footnote">Су, жарық, жылу жөніндегі ресми хабарламалар бұл нұсқада автоматты берілмейді. Тексерілмеген ескертулер жарияланбайды.</p>
 </section>
+
+<section class="screen" id="notices" aria-label="Жаңатас хабарламалары">
+ <div class="sectionTitle"><button class="backButton" data-route="home" aria-label="Артқа"><svg class="ico"><use href="#i-back"/></svg></button><div><div class="sub">Қаладағы маңызды ақпарат</div><h1>📣 Хабарламалар</h1></div></div>
+ <div class="zhl-fd-alert"><strong>Ресми хабарламалар ғана</strong><p>Су, жарық немесе жылу бойынша хабарлама тек дереккөз табылса жарияланады. Хабарламаның болмауы қызметтің міндетті түрде үзілмейтінін білдірмейді.</p></div>
+ <div class="zhl-feed-bar"><span class="zhl-live-label"><span class="zhl-live-dot"></span> Ресми деректер</span><button id="refreshNotices" class="zhl-refresh" type="button">↻ Жаңарту</button></div>
+ <div id="noticeStatus" class="zhl-feed-status">Дереккөздер тексерілуде…</div>
+ <div id="noticeList" class="zhl-articles"><div class="zhl-loading">Хабарламалар жүктелуде…</div></div>
+ <div class="zhl-feed-sources"><strong>Ақпарат көздері</strong><p><a href="https://www.gov.kz/org/zhambyl-sarysu?lang=kk" target="_blank" rel="noopener noreferrer">Сарысу ауданы әкімдігі ↗</a> · <a href="https://www.gov.kz/org/zhambyl-sarysu-zhanatas?lang=kk" target="_blank" rel="noopener noreferrer">Жаңатас қаласы әкімдігі ↗</a></p></div>
+</section>
+<section class="screen" id="news" aria-label="Сарысу Жаңатас жаңалықтары">
+ <div class="sectionTitle"><button class="backButton" data-route="home" aria-label="Артқа"><svg class="ico"><use href="#i-back"/></svg></button><div><div class="sub">Жаңатас пен Сарысу ауданы</div><h1>📰 Жаңалықтар</h1></div></div>
+ <div class="zhl-feed-bar"><span class="zhl-live-label"><span class="zhl-live-dot"></span> gov.kz жаңалықтары</span><button id="refreshNews" class="zhl-refresh" type="button">↻ Жаңарту</button></div>
+ <div id="newsStatus" class="zhl-feed-status">Жаңалықтар тексерілуде…</div>
+ <div id="newsList" class="zhl-articles"><div class="zhl-loading">Ресми жаңалықтар жүктелуде…</div></div>
+ <div class="zhl-feed-sources"><strong>Ресми ақпарат көздері</strong><p><a href="https://www.gov.kz/org/zhambyl-sarysu?lang=kk" target="_blank" rel="noopener noreferrer">Сарысу әкімдігі ↗</a> · <a href="https://www.gov.kz/org/zhambyl-sarysu-zhanatas?lang=kk" target="_blank" rel="noopener noreferrer">Жаңатас әкімдігі ↗</a> · <a href="https://www.gov.kz/memleket/entities/maslihat-sarysu?lang=kk" target="_blank" rel="noopener noreferrer">Сарысу мәслихаты ↗</a></p><small>Жаңарту: қолданба ашылғанда және әр 10 минут сайын; RSS жауабы 25 минутқа дейін кэштеледі. Жарияланған күнін тексеріңіз.</small></div>
+</section>
+
 <section class="screen" id="more" aria-label="Барлық бөлімдер">
   <div class="sectionTitle"><button class="backButton" data-route="home" aria-label="Артқа"><svg class="ico"><use href="#i-back"/></svg></button><div><div class="sub">Жаңатас LIVE</div><h1>Барлық қызметтер</h1></div></div>
   <div class="more-list">
+    <button class="more-row" data-route="notices"><span class="service-icon" style="background:#fff0e8;color:#e55a36;font-size:23px">📣</span><span><strong>Қала хабарламалары</strong><small>Су · жарық · жылу · ескерту</small></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
+    <button class="more-row" data-route="news"><span class="service-icon" style="background:#e9f4fe;color:#377ac9;font-size:23px">📰</span><span><strong>Жаңалықтар</strong><small>Ресми жарияланымдар</small></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
     <button class="more-row" data-route="weather"><span class="service-icon tone-sun"><svg class="ico"><use href="#i-weather"/></svg></span><span><strong>Ауа райы</strong><small>Бүгін · 7 күн</small></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
     <button class="more-row" data-route="map"><span class="service-icon tone-map"><svg class="ico"><use href="#i-map"/></svg></span><span><strong>Қала картасы</strong><small>Көшелер мен орындар</small></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
     <button class="more-row" data-route="air"><span class="service-icon tone-air"><svg class="ico"><use href="#i-air"/></svg></span><span><strong>Ауа сапасы</strong><small>AQI, PM2.5, PM10</small></span><svg class="ico sm"><use href="#i-arrow"/></svg></button>
@@ -227,7 +269,7 @@
 (()=>{'use strict';
 const LAT=43.5621,LON=69.7333,TZ='Asia/Almaty';
 const $=id=>document.getElementById(id);
-const routes=['home','weather','map','air','places','place-detail','emergency','links','more'];
+const routes=['home','weather','map','air','places','place-detail','emergency','links','more','news','notices'];
 const number=(val,dec=0)=>val==null||!Number.isFinite(Number(val))?'—':Number(val).toFixed(dec).replace(/\.0+$/,'');
 const ic=(id)=>`<svg class="ico sm"><use href="#i-${id}"/></svg>`;
 const wxCodes={0:['☀️','Ашық'],1:['🌤️','Көбіне ашық'],2:['⛅','Бұлт аралас'],3:['☁️','Бұлтты'],45:['🌫️','Тұман'],48:['🌫️','Тұман'],51:['🌦️','Сіркіреме'],53:['🌦️','Сіркіреме'],55:['🌧️','Сіркіреме'],56:['🌧️','Мұзды сіркіреме'],57:['🌧️','Мұзды сіркіреме'],61:['🌧️','Жаңбыр'],63:['🌧️','Жаңбыр'],65:['🌧️','Қатты жаңбыр'],66:['🌧️','Мұзды жаңбыр'],67:['🌧️','Мұзды жаңбыр'],71:['🌨️','Қар'],73:['❄️','Қар'],75:['❄️','Қалың қар'],77:['❄️','Қар түйіршігі'],80:['🌦️','Өткінші жауын'],81:['🌧️','Өткінші жауын'],82:['⛈️','Қатты жауын'],85:['🌨️','Қар жаууы'],86:['❄️','Қар жаууы'],95:['⛈️','Найзағай'],96:['⛈️','Найзағай'],99:['⛈️','Найзағай']};
@@ -236,14 +278,14 @@ function todayDate(){const now=new Date();const parts=new Intl.DateTimeFormat('e
 todayDate();
 let loadedMap=false;
 function navigate(id){const page=routes.includes(id)?id:'home';if(location.hash.slice(1)!==page)location.hash=page;activate(page)}
-function activate(id){const page=routes.includes(id)?id:'home';document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===page));document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.route===(['map','weather','home'].includes(page)?page:'more')));window.scrollTo(0,0);document.title=(page==='home'?'Жаңатас LIVE':({weather:'Ауа райы',map:'Қала картасы',air:'Ауа сапасы',places:'Мекемелер','place-detail':'Мекеме туралы',emergency:'Жедел көмек',links:'Пайдалы сілтемелер',more:'Қызметтер'}[page]+' — Жаңатас LIVE'));
+function activate(id){const page=routes.includes(id)?id:'home';document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===page));document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.route===(['map','weather','home'].includes(page)?page:'more')));window.scrollTo(0,0);document.title=(page==='home'?'Жаңатас LIVE':({weather:'Ауа райы',map:'Қала картасы',air:'Ауа сапасы',places:'Мекемелер','place-detail':'Мекеме туралы',emergency:'Жедел көмек',links:'Пайдалы сілтемелер',news:'Жаңалықтар',notices:'Хабарламалар',more:'Қызметтер'}[page]+' — Жаңатас LIVE'));
 if(page==='map'){initializeMap();}
-if(page==='weather')fetchWeather();if(page==='air')fetchAir();if(page==='places'){renderPlaces();maybeAutoRefreshDirectory();}if(page==='place-detail')renderDetails();}
+if(page==='news'||page==='notices')loadOfficialFeed();if(page==='weather')fetchWeather();if(page==='air')fetchAir();if(page==='places'){renderPlaces();maybeAutoRefreshDirectory();}if(page==='place-detail')renderDetails();}
 document.querySelectorAll('[data-route]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.route)));
 window.addEventListener('hashchange',()=>activate(location.hash.slice(1)||'home'));
 /* initial activation deferred */
 const search=$('homeSearch');const tiles=[...document.querySelectorAll('.service')];
-function updateHomeSearch(){const term=search.value.trim();const q=norm(term);let count=0;tiles.forEach(el=>{const match=(!q||norm(el.textContent+' '+(el.dataset.terms||'')).includes(q));el.classList.toggle('hidden',!match);if(match)count++});$('hero').classList.toggle('hidden',!!term);$('searchClear').style.display=term?'flex':'none';$('searchEmpty').classList.add('hidden');const results=term?findPlaces(term).slice(0,6):[];const panel=$('homePlaceResults');panel.classList.toggle('hidden',!term||!results.length);panel.innerHTML=results.length?'<div class="dirMeta"><strong>Мекемелер</strong><span>'+results.length+' нәтиже</span></div>'+results.map(placeCard).join(''):' ';if(q&&!count&&!results.length){$('searchEmpty').classList.remove('hidden');$('searchEmpty').textContent='Ештеңе табылмады. «Мекемелер» бөліміне кіріп іздеп көріңіз.'}document.querySelector('#serviceHeader span').textContent=term?count+' бөлім':'6 бөлім';}
+function updateHomeSearch(){const term=search.value.trim();const q=norm(term);let count=0;tiles.forEach(el=>{const match=(!q||norm(el.textContent+' '+(el.dataset.terms||'')).includes(q));el.classList.toggle('hidden',!match);if(match)count++});$('hero').classList.toggle('hidden',!!term);$('searchClear').style.display=term?'flex':'none';$('searchEmpty').classList.add('hidden');const results=term?findPlaces(term).slice(0,6):[];const panel=$('homePlaceResults');panel.classList.toggle('hidden',!term||!results.length);panel.innerHTML=results.length?'<div class="dirMeta"><strong>Мекемелер</strong><span>'+results.length+' нәтиже</span></div>'+results.map(placeCard).join(''):' ';if(q&&!count&&!results.length){$('searchEmpty').classList.remove('hidden');$('searchEmpty').textContent='Ештеңе табылмады. «Мекемелер» бөліміне кіріп іздеп көріңіз.'}document.querySelector('#serviceHeader span').textContent=term?count+' бөлім':'8 бөлім';}
 search.addEventListener('input',updateHomeSearch);
 search.addEventListener('keydown',e=>{if(e.key==='Enter'){const pl=findPlaces(search.value)[0];if(pl)openDetail(pl.id,'home');else{const found=tiles.find(t=>!t.classList.contains('hidden'));if(found)navigate(found.dataset.route)}search.blur()}});
 $('searchClear').addEventListener('click',()=>{search.value='';updateHomeSearch();search.focus()});
@@ -486,11 +528,65 @@ async function fetchCloudPlaces(){
 
 let directoryAutoRefreshDone=false;
 function maybeAutoRefreshDirectory(){if(directoryAutoRefreshDone)return;directoryAutoRefreshDone=true;if(!cacheRead('zhl-places-live-5',24*3600000))setTimeout(()=>refreshDirectory(false),800)}
+// News and alerts — read-only live cache, source links and publication dates retained.
+const ZHL_FEED_KEY='sb_publishable_jFnBGmBmBujdmLjfM9KTXw_1MTFcWyP';
+const ZHL_FEED_URL='https://lbnfwwyjsgewzjliuxjl.supabase.co/functions/v1/zhanatas-official-feed';
+const ZHL_NOTICES_URL='https://lbnfwwyjsgewzjliuxjl.supabase.co/rest/v1/zhl_notices?select=id,title,body,kind,source_url,published_at,expires_at&is_published=eq.true&order=published_at.desc&limit=70';
+const noticeKinds={water:'💧 Су',electricity:'⚡ Жарық',heating:'♨️ Жылу',roads:'🚧 Жол',other:'📣 Хабарлама'};
+let feedState=null,manualNotices=[],lastFetched=0,busyFeed=false;
+function zhlDate(value){const d=new Date(value);return Number.isFinite(+d)?new Intl.DateTimeFormat('kk-KZ',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Almaty'}).format(d):'Күні көрсетілмеген'}
+function zhlSafeLink(s){try{const u=new URL(s);return u.protocol==='https:'?u.href:null}catch{return null}}
+function zhlTag(text){return escapeHTML(String(text||''))}
+function zhlStory(a,type){const url=zhlSafeLink(a.url||a.source_url);if(!url)return '';
+ const name=zhlTag(a.source||'Жаңатас LIVE · Ресми сілтеме');
+ const title=zhlTag(a.title||'Атауы жоқ');
+ const date=zhlDate(a.date||a.published_at);
+ const summary=zhlTag(a.summary||a.body||'').slice(0,280);
+ const category=type==='alert'?zhlTag(noticeKinds[a.kind]||noticeKinds.other):'Жаңалық';
+ return `<a class="zhl-story" href="${zhlTag(url)}" target="_blank" rel="noopener noreferrer"><div class="zhl-story-head"><span class="zhl-pill">${category}</span><span class="zhl-stamp">${zhlTag(date)}</span></div><strong>${title}</strong>${summary?`<p>${summary}</p>`:''}<small>${name}</small><div class="zhl-view">Толық ақпарат ↗</div></a>`
+}
+function zhlTextItem(a){const title=zhlTag(a.title),summary=zhlTag(a.body||'');return `<div class="zhl-story"><div class="zhl-story-head"><span class="zhl-pill">${zhlTag(noticeKinds[a.kind]||noticeKinds.other)}</span><span class="zhl-stamp">${zhlTag(zhlDate(a.published_at))}</span></div><strong>${title}</strong>${summary?`<p>${summary}</p>`:''}<small>Админ жариялаған хабарлама · ресми сілтемесі жоқ</small></div>`}
+function zhlFeedRender(){
+ const fd=feedState||{news:[],alerts:[],status:'unavailable'};
+ const checked=fd.updated_at?zhlDate(fd.updated_at):'Күні белгісіз';
+ const stale=fd.status==='stale'||fd.status==='unavailable';
+ $('newsStatus').textContent=(stale?'⚠️ RSS уақытша қолжетімсіз. ':'')+'Соңғы тексеру: '+checked+' · Ресми gov.kz';
+ $('noticeStatus').textContent='Соңғы тексеру: '+checked+' · Маңызды ескертулер тек расталған дереккөзден';
+ const news=Array.isArray(fd.news)?fd.news:[];
+ $('newsList').innerHTML=news.length?news.slice(0,32).map(n=>zhlStory(n,'news')).join(''):
+  '<div class="zhl-empty">Әзірге ресми арнадан жаңа Жаңатас/Сарысу жаңалықтары алынбады. Төмендегі ресми сілтемелерден тікелей қарай аласыз.</div>';
+ const today=Date.now();const notices=manualNotices.filter(n=>!n.expires_at||Date.parse(n.expires_at)>today);
+ const alerts=(Array.isArray(fd.alerts)?fd.alerts:[]).filter(a=>a.url);
+ const cards=[...notices.map(a=>({...a,_manual:true,date:a.published_at})),...alerts.map(a=>({...a,_manual:false}))].sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+ $('noticeList').innerHTML=cards.length?cards.slice(0,30).map(a=>a._manual?(a.source_url?zhlStory({...a,source:'Қалалық хабарлама'},'alert'):zhlTextItem(a)):zhlStory(a,'alert')).join(''):
+ '<div class="zhl-empty">Қазір жарияланған, дереккөзі расталған жоспарлы өшіру хабарламасы табылмады. Бұл су, жарық, жылу үзілмейді деген кепілдік емес. Жаңалық пайда болса осында көрсетіледі.</div>';
+}
+async function loadOfficialFeed(force=false){
+ if(busyFeed || !force && feedState && Date.now()-lastFetched<10*60000)return;
+ busyFeed=true;$('refreshNews').disabled=true;$('refreshNotices').disabled=true;
+ try{
+  const [feed,notices]=await Promise.allSettled([
+   fetch(ZHL_FEED_URL,{headers:{apikey:ZHL_FEED_KEY},cache:'no-store',signal:AbortSignal.timeout(17500)}).then(r=>{if(!r.ok)throw Error('RSS '+r.status);return r.json()}),
+   fetch(ZHL_NOTICES_URL,{headers:{apikey:ZHL_FEED_KEY},cache:'no-store',signal:AbortSignal.timeout(9500)}).then(r=>{if(!r.ok)throw Error('Notices '+r.status);return r.json()})
+  ]);
+  if(feed.status==='fulfilled')feedState=feed.value;
+  else if(!feedState)feedState={status:'unavailable',news:[],alerts:[],updated_at:null};
+  if(notices.status==='fulfilled'&&Array.isArray(notices.value))manualNotices=notices.value;
+  lastFetched=Date.now();zhlFeedRender();
+ }catch(e){console.warn('Official feed',e);zhlFeedRender()}
+ finally{busyFeed=false;$('refreshNews').disabled=false;$('refreshNotices').disabled=false;}
+}
+$('refreshNews').addEventListener('click',()=>loadOfficialFeed(true));
+$('refreshNotices').addEventListener('click',()=>loadOfficialFeed(true));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&['news','notices'].includes(location.hash.slice(1)))loadOfficialFeed()});
+setInterval(()=>{if(!document.hidden&&['news','notices'].includes(location.hash.slice(1)))loadOfficialFeed()},10*60000);
+
 renderPlaces();
 // Handle direct links and initial route only after directory and map code initialized.
 activate(location.hash.slice(1)||'home');
 fetchCloudPlaces();
 setInterval(()=>{if(document.visibilityState==='visible')fetchCloudPlaces()},180000);
+
 
 // Standalone GitHub Pages edition: no external PWA files required.
 })();
